@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#030617] text-white m-0 p-0;
+    overflow-x: hidden;
+  }
+}
+
+/* Primary Blueprint Grid */
+.blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(15, 26, 58, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 26, 58, 0.15) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Secondary Fine Mesh */
+.fine-mesh {
+  background-image: 
+    linear-gradient(to right, rgba(15, 26, 58, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 26, 58, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Grid Pulse Animation */
+.grid-pulse-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pulse-line {
+  position: absolute;
+  top: -100px;
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(30, 111, 217, 0.15), transparent);
+  animation: flowDown linear infinite;
+}
+
+@keyframes flowDown {
+  0% { transform: translateY(-100px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Radial Glows */
+.glow-primary {
+  background: radial-gradient(circle at 40% 40%, rgba(46, 42, 160, 0.12) 0%, transparent 50%);
+}
+
+.glow-secondary {
+  background: radial-gradient(circle at 60% 60%, rgba(30, 111, 217, 0.08) 0%, transparent 50%);
+}
+
+.vignette {
+  background: radial-gradient(circle at center, transparent 20%, rgba(3, 6, 23, 0.95) 100%);
+}
+
+/* Smooth Scrolling Snap properties */
+html {
+  scroll-behavior: smooth;
+}
