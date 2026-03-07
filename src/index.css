@@ -3,45 +3,52 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-primary: #030617;
+    --bg-secondary: #010208;
+    --text-main: #eeedf8;
+    --text-muted: rgba(238, 237, 248, 0.55);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --glow-opacity: 0.5;
+    --grid-opacity: 0.2;
+    --color-accent: #2277aa;
+    --color-accent-rgb: 34, 119, 170;
+  }
+
+  :root.light {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --glow-opacity: 0.2;
+    --grid-opacity: 0.4;
+    --color-accent: #221177;
+    --color-accent-rgb: 34, 17, 119;
+  }
+
   body {
-    @apply bg-[#030617] text-white m-0 p-0;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    @apply m-0 p-0 transition-colors duration-500;
     overflow-x: hidden;
+  }
+
+  p {
+    @apply normal-case;
   }
 }
 
 /* Primary Blueprint Grid */
 .blueprint-grid {
   background-image: 
-    linear-gradient(to right, rgba(15, 26, 58, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 26, 58, 0.15) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
-/* Secondary Fine Mesh */
-.fine-mesh {
-  background-image: 
-    linear-gradient(to right, rgba(15, 26, 58, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 26, 58, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
+    linear-gradient(to right, rgba(var(--color-accent-rgb), 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--color-accent-rgb), 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 /* Grid Pulse Animation */
-.grid-pulse-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.pulse-line {
-  position: absolute;
-  top: -100px;
-  width: 1px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, rgba(30, 111, 217, 0.15), transparent);
-  animation: flowDown linear infinite;
-}
-
-@keyframes flowDown {
+@keyframes grid-pulse {
   0% { transform: translateY(-100px); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
@@ -50,15 +57,111 @@
 
 /* Radial Glows */
 .glow-primary {
-  background: radial-gradient(circle at 40% 40%, rgba(46, 42, 160, 0.12) 0%, transparent 50%);
+  background: radial-gradient(circle at 50% 40%, rgba(34, 17, 119, var(--glow-opacity)) 0%, transparent 60%);
 }
 
 .glow-secondary {
-  background: radial-gradient(circle at 60% 60%, rgba(30, 111, 217, 0.08) 0%, transparent 50%);
+  background: radial-gradient(circle at 80% 60%, rgba(0, 51, 238, var(--glow-opacity)) 0%, transparent 50%);
 }
 
 .vignette {
-  background: radial-gradient(circle at center, transparent 20%, rgba(3, 6, 23, 0.95) 100%);
+  background: radial-gradient(circle at center, transparent 20%, var(--bg-primary) 100%);
+  opacity: 0.6;
+}
+
+/* Custom Animated Hamburger Menu */
+.menu-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-btn svg {
+  width: 32px;
+  height: 32px;
+}
+
+.menu-btn .line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-btn .line1 {
+  stroke-dasharray: 60 207;
+}
+
+.menu-btn .line2 {
+  stroke-dasharray: 60 60;
+}
+
+.menu-btn .line3 {
+  stroke-dasharray: 60 207;
+}
+
+.menu-btn.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+}
+
+.menu-btn.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+}
+
+.menu-btn.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+}
+
+/* Custom Animated Chevron */
+.chevron-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chevron-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chevron-btn .line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chevron-btn .line {
+  stroke-dasharray: 43 86;
+  stroke-dashoffset: 0;
+}
+
+.chevron-btn.opened {
+  transform: rotate(180deg);
+}
+
+.chevron-btn.opened .line {
+  stroke-dashoffset: -43;
 }
 
 /* Smooth Scrolling Snap properties */
