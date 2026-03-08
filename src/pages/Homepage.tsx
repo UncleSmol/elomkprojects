@@ -57,7 +57,7 @@ const ServiceCard = React.memo(({
           src={`${img}&auto=format&fit=crop&q=60&w=800`}
           alt={title}
           loading="lazy"
-          className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out"
+          className="w-full h-full object-cover dark:grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent z-10" />
       </div>
@@ -100,7 +100,7 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
       className="absolute inset-0 h-screen w-screen overflow-hidden bg-[var(--bg-primary)] border-l border-[var(--border-color)] text-[var(--text-main)] will-change-transform"
     >
       <div className="absolute inset-0 opacity-30">
-        <img src={`${step.images[0]}&auto=format&fit=crop&q=60&w=1200`} className="w-full h-full object-cover grayscale" alt="" />
+        <img src={`${step.images[0]}&auto=format&fit=crop&q=60&w=1200`} className="w-full h-full object-cover dark:grayscale" alt="" />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)]" />
       </div>
       <div className="relative z-20 h-full w-full flex flex-col justify-center items-center px-6 text-center">
@@ -309,11 +309,11 @@ const Homepage = () => {
               <TrustItem text="Home & Business" />
             </div>
           </motion.div>
-          <div className="relative w-[35%] lg:w-1/2 h-full z-20 border-l border-[var(--border-color)] overflow-hidden bg-[var(--bg-primary)] shadow-[-20px_0_40px_rgba(3,6,23,0.3)] transition-colors duration-500">
+          <div className="relative w-[35%] lg:w-1/2 h-full z-20 border-l border-[var(--border-color)] overflow-hidden bg-[var(--bg-primary)] shadow-[-20px_0_40px_rgba(3,6,23,0.3)] transition-colors duration-500 group">
             <motion.img
               style={{ scale: imageScale }}
               src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200"
-              className="w-full h-full object-cover grayscale opacity-50 will-change-transform"
+              className="w-full h-full object-cover dark:grayscale group-hover:grayscale-0 opacity-50 will-change-transform transition-all duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-[var(--bg-primary)] via-transparent to-transparent transition-colors duration-500" />
           </div>

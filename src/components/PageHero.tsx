@@ -6,7 +6,7 @@ const PageHero = ({ title, subtitle, image }: { title: string, subtitle: string,
       <div className="absolute inset-0 z-0">
         <img 
           src={`${image}&auto=format&fit=crop&q=80&w=1600`} 
-          className="w-full h-full object-cover grayscale opacity-30" 
+          className="w-full h-full object-cover dark:grayscale opacity-30" 
           alt={title} 
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)]/60 to-[var(--bg-primary)] transition-colors duration-500" />
