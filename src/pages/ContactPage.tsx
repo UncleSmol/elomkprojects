@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, PhoneCall } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle, PhoneCall } from 'lucide-react';
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
