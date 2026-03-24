@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { servicesData } from '../data/pagesData';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import PageHero from '../components/PageHero';
+import servicesHeroImg from '../assets/cctv-tech2.png';
 
 const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,19 +73,20 @@ const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
           <div className={`lg:col-span-6 relative h-[400px] md:h-[500px] ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
             <motion.div 
               style={{ y: yImage }}
-              className="absolute inset-0 rounded-2xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-2xl"
+              className="absolute inset-0 rounded-2xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-2xl z-0"
             >
               <img 
-                src={`${service.image}&auto=format&fit=crop&q=60&w=1200`}
+                src={service.image.includes('unsplash.com') ? `${service.image}&auto=format&fit=crop&q=60&w=1200` : service.image}
                 className="w-full h-full object-cover dark:grayscale opacity-40 hover:grayscale-0 transition-all duration-1000"
                 alt={service.title}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
             </motion.div>
 
+            {/* Background Number moved to front with higher z-index */}
             <motion.span 
-              style={{ y: useTransform(smoothProgress, [0, 1], ["30%", "-30%"]) }}
-              className="absolute -bottom-12 -right-12 text-[12rem] font-bold text-[var(--text-main)]/[0.03] leading-none select-none z-0 hidden md:block"
+              style={{ y: useTransform(smoothProgress, [0, 1], ["20%", "-20%"]) }}
+              className={`absolute bottom-0 ${isEven ? '-right-12' : '-left-12'} text-[12rem] md:text-[18rem] font-bold text-white/[0.07] leading-none select-none z-20 hidden md:block pointer-events-none drop-shadow-2xl`}
             >
               0{index + 1}
             </motion.span>
@@ -97,30 +100,16 @@ const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
 
 const ServicesOverview = () => {
   return (
-    <div className="bg-[var(--bg-primary)] pt-32 pb-24 overflow-x-hidden text-[var(--text-main)] transition-colors duration-500">
-      <section className="container mx-auto px-6 mb-32">
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-16 h-px bg-indigo/40" />
-              <span className="text-[10px] uppercase font-rajdhani font-bold text-cyan tracking-[0.5em]">Work Catalog</span>
-            </div>
-            <h1 className="text-5xl md:text-8xl font-bold mb-12 tracking-tighter leading-none uppercase">
-              Technical <br />
-              <span className="text-[var(--text-muted)] italic text-4xl md:text-7xl">Services Hub</span>
-            </h1>
-            <p className="text-[var(--text-muted)] text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
-              Reliable installations and local workmanship. We handle your security and maintenance needs with a focus on quality and durability.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className="pb-24 overflow-x-hidden text-[var(--text-main)] transition-colors duration-500">
+      <PageHero 
+        tag="Work Catalog"
+        title="Technical"
+        italicTitle="Services Hub"
+        subtitle="Reliable installations and local workmanship. We handle your security and maintenance needs with a focus on quality and durability."
+        image={servicesHeroImg}
+      />
 
-      <section className="relative">
+      <section className="relative z-30">
         {Object.entries(servicesData).map(([path, service], i) => (
           <ServiceStrip key={path} service={service} index={i} />
         ))}
@@ -131,7 +120,7 @@ const ServicesOverview = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative rounded-3xl overflow-hidden bg-indigo/5 border border-[var(--border-color)] p-12 md:p-24 text-center transition-colors duration-500"
+          className="relative rounded-3xl overflow-hidden bg-[var(--bg-secondary)] border border-[var(--border-color)] p-12 md:p-24 text-center transition-colors duration-500"
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
           <h2 className="text-3xl md:text-5xl font-bold mb-8 uppercase tracking-tight">Ready to start?</h2>

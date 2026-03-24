@@ -9,9 +9,11 @@ interface CorporatePageProps {
 
 const CorporatePage = ({ title, subtitle, description }: CorporatePageProps) => {
   return (
-    <div className="pt-20 bg-[var(--bg-primary)] min-h-screen text-[var(--text-main)] transition-colors duration-300">
+    <div className="min-h-screen text-[var(--text-main)] transition-colors duration-300">
       <PageHero 
-        title={title} 
+        tag="Corporate Profile"
+        title={title.split(' ')[0]} 
+        italicTitle={title.split(' ').slice(1).join(' ')}
         subtitle={subtitle} 
         image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80"
       />
@@ -48,9 +50,9 @@ const CorporatePage = ({ title, subtitle, description }: CorporatePageProps) => 
               {/* Leader 1 */}
               <motion.div 
                 initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group p-8 border border-[var(--border-color)] bg-indigo/5 rounded-2xl relative overflow-hidden"
+                className="group p-8 border border-[var(--border-color)] bg-[var(--bg-secondary)] rounded-2xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-cyan/5 blur-3xl group-hover:bg-cyan/10 transition-all" />
                 <span className="text-[10px] font-rajdhani font-bold text-cyan/40 uppercase tracking-widest mb-4 block">Director</span>
@@ -69,7 +71,7 @@ const CorporatePage = ({ title, subtitle, description }: CorporatePageProps) => 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="group p-8 border border-[var(--border-color)] bg-indigo/5 rounded-2xl relative overflow-hidden"
+                className="group p-8 border border-[var(--border-color)] bg-[var(--bg-secondary)] rounded-2xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-indigo/5 blur-3xl group-hover:bg-indigo/10 transition-all" />
                 <span className="text-[10px] font-rajdhani font-bold text-cyan/40 uppercase tracking-widest mb-4 block">Director</span>

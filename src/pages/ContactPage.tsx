@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import contactHeroImg from '../assets/contact-hero.jpg';
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
@@ -21,7 +22,7 @@ const ContactPage = () => {
 
   useEffect(() => {
     if (initialService) {
-      const options = ["Electric Fencing", "CCTV Installations", "Gate Automation", "Plumbing", "Civil Works"];
+      const options = ["Electric Fencing", "CCTV Installations", "Gate Automation", "Plumbing"];
       const match = options.find(opt => opt.toLowerCase() === initialService.toLowerCase());
       if (match) {
         setFormData(prev => ({ ...prev, service: match }));
@@ -84,11 +85,13 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-20 bg-[var(--bg-primary)] min-h-screen text-[var(--text-main)] transition-colors duration-500 overflow-x-hidden">
+    <div className="min-h-screen text-[var(--text-main)] transition-colors duration-500 overflow-x-hidden">
       <PageHero 
-        title="Contact Us" 
+        tag="Command Center"
+        title="Contact" 
+        italicTitle="Our Team"
         subtitle="Connect with our technical team for reliable installations and maintenance."
-        image="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80"
+        image={contactHeroImg}
       />
 
       <section className="relative z-20 container mx-auto px-6 py-24 md:py-32">
@@ -265,7 +268,6 @@ const ContactPage = () => {
                       <option className="bg-[var(--bg-secondary)]" value="CCTV Installations">CCTV Installations</option>
                       <option className="bg-[var(--bg-secondary)]" value="Gate Automation">Gate Automation</option>
                       <option className="bg-[var(--bg-secondary)]" value="Plumbing">Plumbing</option>
-                      <option className="bg-[var(--bg-secondary)]" value="Civil Works">Civil Works</option>
                       <option className="bg-[var(--bg-secondary)]" value="Other / Quote Request">Other / Quote Request</option>
                     </select>
                   </div>

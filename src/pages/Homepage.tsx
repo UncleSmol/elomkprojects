@@ -8,8 +8,13 @@ import {
 } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import cctvImg from "../assets/cctv-tech.png";
-import cctvImg2 from "../assets/cctv-tech2.png";
+import electricFencingImg from "../assets/electrical-fencing-service.png";
+import plumbingImg from "../assets/plumbing-service.jpg";
+import cctvServiceImg from "../assets/cctv-installation-service.png";
+import gateServiceImg from "../assets/gate-automation-service.png";
+import installProcessImg from "../assets/installation-process.jpg";
+import testingProcessImg from "../assets/testing-process.png";
+import supportProcessImg from "../assets/support-process.jpg";
 
 /* --- SUB-COMPONENTS --- */
 
@@ -65,6 +70,11 @@ const ServiceCard = React.memo(({
   const opacity = useTransform(smoothProgress, [0, 0.1, 0.85, 1], [0, 1, 1, 0]);
   const scale = useTransform(smoothProgress, [0.8, 1], [1, 0.9]);
 
+  // Handle image src for both external and local images
+  const imgSrc = img.includes("unsplash.com") 
+    ? `${img}&auto=format&fit=crop&q=60&w=800` 
+    : img;
+
   return (
     <motion.article
       ref={cardRef}
@@ -74,7 +84,7 @@ const ServiceCard = React.memo(({
       {/* Background Image with Hover Effect */}
       <div className="absolute inset-0 z-0">
         <img
-          src={`${img}&auto=format&fit=crop&q=60&w=800`}
+          src={imgSrc}
           alt={title}
           loading="lazy"
           className="w-full h-full object-cover dark:grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out"
@@ -220,19 +230,19 @@ const WorkflowSection = () => {
     {
       title: "Install",
       desc: "Our team handles the professional installation of all equipment.",
-      images: [cctvImg, cctvImg2],
+      images: [installProcessImg],
       tag: "PHASE 02",
     },
     {
       title: "Test",
       desc: "We thoroughly test every system to ensure it works perfectly.",
-      images: ["https://plus.unsplash.com/premium_photo-1682126180093-1ebe1a04075a?q=80"],
+      images: [testingProcessImg],
       tag: "PHASE 03",
     },
     {
       title: "Support",
       desc: "We provide ongoing support and maintenance when you need it.",
-      images: ["https://images.unsplash.com/photo-1508962914676-134849a727f0?q=80"],
+      images: [supportProcessImg],
       tag: "PHASE 04",
     },
   ], []);
@@ -366,33 +376,27 @@ const Homepage = () => {
       {
         title: "Electric Fencing",
         desc: "Secure perimeter fencing for your home.",
-        img: "https://images.unsplash.com/photo-1549109926-9620d1b9bfa2?q=80",
+        img: electricFencingImg,
         speed: 1.2,
       },
       {
         title: "CCTV Systems",
         desc: "Reliable camera installations and setup.",
-        img: "https://images.unsplash.com/photo-1600069620961-8bee77c2e28a?q=80",
+        img: cctvServiceImg,
         speed: 0.8,
       },
       {
         title: "Gate Automation",
         desc: "Gate motors and garage door repairs.",
-        img: "https://images.unsplash.com/photo-1588362951121-3ee319b018b2?q=80",
+        img: gateServiceImg,
         speed: 1.5,
       },
       {
         title: "Plumbing",
         desc: "Professional plumbing repairs and services.",
-        img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80",
+        img: plumbingImg,
         speed: 1.0,
-      },
-      {
-        title: "Maintenance",
-        desc: "Regular upkeep for all your systems.",
-        img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80",
-        speed: 0.9,
-      },
+      }
     ],
     []
   );
@@ -438,9 +442,9 @@ const Homepage = () => {
             <motion.img
               style={{ scale: imageScale }}
               src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200"  
-              className="w-full h-full object-cover dark:grayscale group-hover:grayscale-0 opacity-50 transition-all duration-1000"
+              className="w-full h-full object-cover group-hover:scale-110 opacity-100 transition-all duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-[var(--bg-primary)] via-transparent to-transparent transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-l from-[var(--bg-primary)]/40 via-transparent to-transparent transition-colors duration-500" />
           </div>
 
           {/* Animated Scroll Indicator */}
