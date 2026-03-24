@@ -5,6 +5,17 @@ import { Sun, Moon } from "lucide-react";
 import Logo from "../assets/Elomk - Logo PNG2.png";
 import { useTheme } from "../context/ThemeContext";
 
+/**
+ * Navbar Component
+ * 
+ * A fixed-position navigation bar that adapts its styling on scroll.
+ * Handles:
+ * - Dynamic background transparency based on scroll position.
+ * - Active section tracking via Intersection Observer (for the Homepage).
+ * - Theme toggling (Dark/Light).
+ * - Mobile menu with animated transitions.
+ * - Scroll-to-top behavior on route changes.
+ */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,13 +23,18 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
 
+  // Handle scroll detection to toggle navbar "compact" mode
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Section Tracking Logic
+  /**
+   * Section Tracking Logic:
+   * Uses Intersection Observer to determine which section is currently in view.
+   * This is used to highlight the correct link in the Navbar while on the Homepage.
+   */
   useEffect(() => {
     if (pathname !== "/") {
       setActiveSection("");
@@ -28,7 +44,7 @@ const Navbar = () => {
     const sections = ["services", "process", "contact"];
     const observerOptions = {
       root: null,
-      rootMargin: "-20% 0px -20% 0px",
+      rootMargin: "-20% 0px -20% 0px", // Offset to trigger before section fully hits center
       threshold: 0.3,
     };
 
@@ -49,12 +65,13 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // Scroll to top on route change
+  // Ensure user is at the top of the page when navigating between routes
   useEffect(() => {
     window.scrollTo(0, 0);
-    setMobileMenuOpen(false);
+    setMobileMenuOpen(false); // Close mobile menu on navigation
   }, [pathname]);
 
+  // Navigation link configuration
   const navLinks = [
     { name: "Home", href: "/", id: "" },
     { name: "Services", href: "/services", id: "services" },
@@ -63,6 +80,10 @@ const Navbar = () => {
     { name: "Contact", href: "/contact", id: "contact" },
   ];
 
+  /**
+   * Helper function to determine if a link is currently active.
+   * Handles both route-based and ID-based (hash) links.
+   */
   const isLinkActive = (link: any) => {
     if (link.name === "Services") return pathname.startsWith("/services");
     if (link.href.startsWith("/#")) {
@@ -80,14 +101,14 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo Section */}
         <Link to="/" className="flex items-center gap-3 group cursor-pointer">
           <div className="w-12 h-12 flex items-center justify-center rounded transition-all">
             <img src={Logo} alt="ELOMK Projects Logo" className="w-full h-full object-contain" />
           </div>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-12">
           <ul className="flex gap-10">
             {navLinks.map((link) => {
@@ -97,7 +118,7 @@ const Navbar = () => {
                   {link.href.startsWith("/#") ? (
                     <a
                       href={link.href}
-                      className={`font-rajdhani font-bold text-[10px] uppercase tracking-[0.3em] transition-all relative block py-2 ${
+                      className={`font-rajdhani font-bold text-xs uppercase tracking-[0.2em] transition-all relative block py-2 ${
                         active ? "text-cyan" : "text-[var(--text-muted)] hover:text-cyan"
                       }`}
                     >
@@ -107,7 +128,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.href}
-                      className={`font-rajdhani font-bold text-[10px] uppercase tracking-[0.3em] transition-all relative block py-2 ${
+                      className={`font-rajdhani font-bold text-xs uppercase tracking-[0.2em] transition-all relative block py-2 ${
                         active ? "text-cyan" : "text-[var(--text-muted)] hover:text-cyan"
                       }`}
                     >
@@ -120,6 +141,7 @@ const Navbar = () => {
             })}
           </ul>
 
+          {/* Theme Toggle and Quote CTA (Desktop) */}
           <div className="flex items-center gap-6">
             <button 
               onClick={toggleTheme}
@@ -128,18 +150,18 @@ const Navbar = () => {
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <Link 
+            <Link
               to="/contact"
-              className="px-6 py-2 border border-cyan/30 bg-cyan/5 hover:bg-cyan hover:text-[var(--bg-secondary)] text-cyan font-rajdhani font-bold text-[10px] tracking-[0.3em] uppercase rounded transition-all shadow-[0_0_20px_rgba(70,179,211,0.1)] active:scale-95"
+              className="px-6 py-2 border border-cyan/30 bg-cyan/5 hover:bg-cyan hover:text-[var(--bg-secondary)] text-cyan font-rajdhani font-bold text-xs tracking-[0.2em] uppercase rounded transition-all shadow-[0_0_20px_rgba(70,179,211,0.1)] active:scale-95"
             >
               Get A Quote
             </Link>
           </div>
         </div>
 
-        {/* Mobile Actions */}
+        {/* Mobile Actions: Theme Toggle and Hamburger Menu */}
         <div className="lg:hidden flex items-center gap-4">
-          <button 
+          <button
             onClick={toggleTheme}
             className="p-2 text-[var(--text-muted)] hover:text-cyan transition-colors"
             aria-label="Toggle Theme"
@@ -152,6 +174,7 @@ const Navbar = () => {
             aria-label="Main Menu"
             aria-expanded={mobileMenuOpen}
           >
+            {/* Animated SVG Hamburger */}
             <svg width="100" height="100" viewBox="0 0 100 100">
               <path className="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
               <path className="line line2" d="M 20,50 H 80" />
@@ -161,6 +184,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Full-screen Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -189,7 +213,7 @@ const Navbar = () => {
                   </div>
                 );
               })}
-              <Link 
+              <Link
                 to="/contact"
                 className="w-full py-5 bg-indigo text-white font-rajdhani font-bold text-sm tracking-[0.3em] uppercase rounded shadow-2xl mt-8 text-center"
                 onClick={() => setMobileMenuOpen(false)}

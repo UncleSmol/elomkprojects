@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
-import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle, PhoneCall } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
@@ -102,6 +103,19 @@ const ContactPage = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const WHATSAPP_NUMBER = "+27000000000"; // Replace with actual number
+
+  const whatsappTemplates = [
+    { label: "General Inquiry", message: "Hi Elomk Projects, I'd like to inquire about your services." },
+    { label: "Quote Request", message: "Hello, I would like to request a quote for a new project." },
+    { label: "Emergency Repair", message: "URGENT: I need assistance with an emergency repair." }
+  ];
+
+  const handleWhatsAppClick = (message: string) => {
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodedMessage}`, '_blank');
+  };
+
   return (
     <div className="pt-20 bg-[var(--bg-primary)] min-h-screen text-[var(--text-main)] transition-colors duration-500 overflow-x-hidden">
       <PageHero 
@@ -133,34 +147,37 @@ const ContactPage = () => {
               Our team is ready to help with your gate repairs, fence installations, or plumbing needs. Reach out for straightforward service.
             </p>
 
-            {/* Request a Call Section */}
-            <div className="mb-16 p-8 bg-indigo/5 border border-cyan/20 rounded-2xl transition-colors duration-500">
+            {/* WhatsApp Conversation Card */}
+            <div className="mb-16 p-8 bg-indigo/5 border border-cyan/20 rounded-2xl transition-all duration-500 hover:border-cyan/40 group">
               <div className="flex items-center gap-3 mb-6">
-                <PhoneCall className="w-5 h-5 text-cyan animate-bounce" />
-                <h4 className="font-rajdhani font-bold text-sm uppercase tracking-widest text-cyan">Request a call back</h4>
+                <FaWhatsapp className="w-6 h-6 text-cyan animate-pulse" />
+                <div>
+                  <h4 className="font-rajdhani font-bold text-sm uppercase tracking-widest text-cyan">Instant WhatsApp</h4>
+                  <p className="text-[8px] text-[var(--text-muted)] uppercase tracking-widest mt-1">Select a template to begin</p>
+                </div>
               </div>
               
-              {callStatus === 'success' ? (
-                <p className="text-cyan text-xs font-bold uppercase animate-pulse">Request received. We will call you shortly.</p>
-              ) : (
-                <form onSubmit={handleCallRequest} className="flex gap-2">
-                  <input 
-                    required
-                    type="tel" 
-                    placeholder="YOUR PHONE NUMBER"
-                    value={callRequestPhone}
-                    onChange={(e) => setCallRequestPhone(e.target.value)}
-                    className="flex-grow bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-cyan/30 transition-all text-[var(--text-main)] w-full min-w-0"
-                  />
-                  <button 
-                    type="submit"
-                    disabled={callStatus === 'submitting'}
-                    className="bg-cyan hover:bg-cyan/80 text-[var(--bg-secondary)] px-6 py-3 rounded-lg font-rajdhani font-bold text-xs uppercase tracking-widest transition-all disabled:opacity-50 shrink-0"
+              <div className="grid gap-3">
+                {whatsappTemplates.map((template, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleWhatsAppClick(template.message)}
+                    className="w-full text-left p-4 bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-cyan/30 rounded-xl transition-all group/btn flex items-center justify-between"
                   >
-                    {callStatus === 'submitting' ? '...' : 'CALL ME'}
+                    <span className="text-xs font-bold uppercase tracking-widest group-hover/btn:text-cyan transition-colors">{template.label}</span>
+                    <Send className="w-3 h-3 text-[var(--text-muted)] group-hover/btn:text-cyan transition-colors" />
                   </button>
-                </form>
-              )}
+                ))}
+              </div>
+              
+              <div className="mt-6 pt-6 border-t border-[var(--border-color)]">
+                <button
+                  onClick={() => handleWhatsAppClick("Hello Elomk Projects, I have a custom inquiry.")}
+                  className="w-full py-4 bg-cyan/10 hover:bg-cyan text-cyan hover:text-[var(--bg-secondary)] border border-cyan/20 rounded-xl font-rajdhani font-bold text-xs uppercase tracking-widest transition-all"
+                >
+                  Custom Message
+                </button>
+              </div>
             </div>
 
             <div className="space-y-10">
