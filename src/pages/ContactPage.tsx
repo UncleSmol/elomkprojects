@@ -16,10 +16,8 @@ const ContactPage = () => {
     message: ''
   });
 
-  const [callRequestPhone, setCallRequestPhone] = useState('');
   const [ticketId] = useState(() => Math.floor(100000 + Math.random() * 900000));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [callStatus, setCallStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     if (initialService) {
@@ -65,37 +63,6 @@ const ContactPage = () => {
       }
     } catch (error) {
       setStatus('error');
-    }
-  };
-
-  const handleCallRequest = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!callRequestPhone) return;
-    setCallStatus('submitting');
-
-    const cleanData = {
-      phone: sanitizeInput(callRequestPhone),
-      _subject: `URGENT: Call Back Request [Ticket #${ticketId}]`,
-      _template: "box",
-      message: `Client requested a call back immediately at: ${callRequestPhone}`
-    };
-
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/ntsako.khoza@yahoo.com", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(cleanData)
-      });
-
-      if (response.ok) {
-        setCallStatus('success');
-        setCallRequestPhone('');
-        setTimeout(() => setCallStatus('idle'), 5000);
-      } else {
-        setCallStatus('error');
-      }
-    } catch (error) {
-      setCallStatus('error');
     }
   };
 

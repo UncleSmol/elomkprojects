@@ -6,7 +6,7 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import cctvImg from "../assets/cctv-tech.png";
 import cctvImg2 from "../assets/cctv-tech2.png";
