@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import contactHeroImg from '../assets/contact-hero.jpg';
+import Map from '../components/Map';
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
@@ -327,6 +328,22 @@ const ContactPage = () => {
                     type="submit"
                     disabled={status === 'submitting'}
                     className="w-full py-5 bg-indigo hover:bg-indigo/80 disabled:opacity-50 text-white font-rajdhani font-bold text-xs tracking-[0.3em] uppercase rounded shadow-[0_10px_30px_rgba(34,17,119,0.3)] active:scale-95 transition-all flex items-center justify-center gap-3"
+                  >
+                    {status === 'submitting' ? 'Transmitting...' : 'Initiate Transmission'} <Send className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+
+        </motion.div>
+      </section>
+    </div>
+  );
+};
+
+export default ContactPage;
+
                   >
                     {status === 'submitting' ? 'Transmitting...' : 'Initiate Transmission'} <Send className="w-4 h-4" />
                   </button>
