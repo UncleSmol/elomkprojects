@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import electricFencingImg from "../assets/electrical-fencing-service.png";
 import plumbingImg from "../assets/plumbing-service.jpg";
 import cctvServiceImg from "../assets/cctv-installation-service.png";
@@ -511,6 +512,10 @@ const Homepage = () => {
 
   return (
     <>
+      <SEO 
+        title="ELOMK Projects | Quality Security & Technical Services" 
+        description="Professional security installations, CCTV systems, electric fencing, and technical maintenance services based in Emalahleni." 
+      />
       {/* Hero Section */}
       <div
         ref={heroRef}

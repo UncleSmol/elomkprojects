@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import PageHero from '../components/PageHero';
+import SEO from '../components/SEO';
 
 interface CorporatePageProps {
   title: string;
@@ -27,6 +28,10 @@ const CorporatePage = ({ title, subtitle, description }: CorporatePageProps) => 
 
   return (
     <div className="min-h-screen text-[var(--text-main)] transition-colors duration-300">
+      <SEO 
+        title="About Us - ELOMK Projects" 
+        description="Learn about ELOMK Projects, a multi-disciplinary services company dedicated to providing high-quality security installations and technical maintenance in Emalahleni." 
+      />
       <PageHero 
         tag="Corporate Profile"
         title={title.split(' ')[0]} 

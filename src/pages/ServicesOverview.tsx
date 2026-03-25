@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { servicesData } from '../data/pagesData';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import SEO from '../components/SEO';
 import servicesHeroImg from '../assets/cctv-tech2.png';
 
 const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
@@ -101,6 +102,10 @@ const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
 const ServicesOverview = () => {
   return (
     <div className="pb-24 overflow-x-hidden text-[var(--text-main)] transition-colors duration-500">
+      <SEO 
+        title="Services Hub - ELOMK Projects" 
+        description="Explore our catalog of professional technical services including electric fencing, CCTV installations, gate automation, and plumbing." 
+      />
       <PageHero 
         tag="Work Catalog"
         title="Technical"

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import SEO from '../components/SEO';
 import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import contactHeroImg from '../assets/contact-hero.jpg';
@@ -28,12 +29,14 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     service: 'Other / Quote Request',
     message: ''
   });
 
   const [ticketId] = useState(() => Math.floor(100000 + Math.random() * 900000));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialService) {
@@ -54,31 +57,35 @@ const ContactPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage(null);
 
     const cleanData = {
       name: sanitizeInput(formData.name),
       phone: sanitizeInput(formData.phone),
+      email: sanitizeInput(formData.email),
       service: sanitizeInput(formData.service),
       message: sanitizeInput(formData.message),
-      _subject: `New Request [Ticket #${ticketId}] - ${formData.service}`,
-      _template: "table"
+      ticketId: ticketId
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/ntsako.khoza@yahoo.com", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cleanData)
       });
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', phone: '', service: 'Other / Quote Request', message: '' });
+        setFormData({ name: '', phone: '', email: '', service: 'Other / Quote Request', message: '' });
       } else {
+        const errorData = await response.json().catch(() => ({}));
         setStatus('error');
+        setErrorMessage(errorData.error || `Server returned ${response.status}: ${response.statusText}`);
       }
-    } catch (error) {
+    } catch (err: any) {
       setStatus('error');
+      setErrorMessage(err.message || "Network error. Please ensure you are running the project via Vercel CLI (vercel dev).");
     }
   };
 
@@ -101,6 +108,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen text-[var(--text-main)] transition-colors duration-500 overflow-x-hidden">
+      <SEO 
+        title="Contact Us - ELOMK Projects" 
+        description="Get in touch with our technical team in Emalahleni for a quote or direct assistance. Connect with us via WhatsApp, phone, or email." 
+      />
       <PageHero 
         tag="Command Center"
         title="Contact" 
@@ -230,9 +241,16 @@ const ContactPage = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {status === 'error' && (
-                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-xs font-bold tracking-widest uppercase">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      Please fill out all fields correctly and try again.
+                    <div className="flex flex-col gap-2 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-xs font-bold tracking-widest uppercase">
+                      <div className="flex items-center gap-3">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        Transmission Failure
+                      </div>
+                      {errorMessage && (
+                        <div className="pl-7 opacity-70 font-mono normal-case tracking-normal">
+                          LOG: {errorMessage}
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -261,6 +279,19 @@ const ContactPage = () => {
                         className="w-full bg-white/[0.03] border border-[var(--border-color)] rounded-lg px-4 py-4 text-sm text-[var(--text-main)] placeholder:text-white/10 focus:outline-none focus:border-cyan/30 transition-all uppercase"
                       />
                     </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[8px] font-rajdhani font-bold text-cyan tracking-widest uppercase">Email Address</label>
+                    <input 
+                      required
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="ENTER EMAIL ADDRESS" 
+                      className="w-full bg-white/[0.03] border border-[var(--border-color)] rounded-lg px-4 py-4 text-sm text-[var(--text-main)] placeholder:text-white/10 focus:outline-none focus:border-cyan/30 transition-all uppercase"
+                    />
                   </div>
 
                   <div className="space-y-2">

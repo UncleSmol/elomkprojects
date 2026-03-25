@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import PageHero from '../components/PageHero';
+import SEO from '../components/SEO';
 import installImg from '../assets/installation-process.jpg';
 import testingImg from '../assets/testing-process.png';
 import supportImg from '../assets/support-process.jpg';
@@ -109,6 +110,10 @@ const ProcessPage = () => {
 
   return (
     <div className="min-h-screen transition-colors duration-300">
+      <SEO 
+        title="Our Workflow - ELOMK Projects" 
+        description="Discover our reliable 4-step installation workflow: Plan, Install, Test, and Support. Delivering professional technical services and security solutions." 
+      />
       <PageHero 
         tag="Step-By-Step Workflow"
         title="Our" 

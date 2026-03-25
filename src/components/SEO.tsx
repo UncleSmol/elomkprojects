@@ -15,7 +15,7 @@ const SEO = ({
   description,
   keywords = "security installations, CCTV systems, electric fencing, access control, technical solutions",
   type = "website",
-  url = "https://elomkprojects.co.za",
+  url = "https://www.elomkprojects.co.za",
   image = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200",
   schema,
 }: SEOProps) => {

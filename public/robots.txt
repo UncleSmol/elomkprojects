@@ -2,4 +2,4 @@ User-agent: *
 Disallow:
 Allow: /
 
-Sitemap: https://elomkprojects.co.za/sitemap.xml
+Sitemap: https://www.elomkprojects.co.za/sitemap.xml
