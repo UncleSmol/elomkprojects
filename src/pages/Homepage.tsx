@@ -519,13 +519,13 @@ const Homepage = () => {
       {/* Hero Section */}
       <div
         ref={heroRef}
-        className="relative h-screen z-10 text-[var(--text-main)]"
+        className="relative h-[130vh] z-10 text-[var(--text-main)]"
       >
         <main className="sticky top-0 h-screen w-full overflow-hidden flex flex-row">
           {/* Left Side: Text and CTA */}
           <motion.div
             style={{ x: textX, opacity: textOpacity }}
-            className="relative w-[65%] lg:w-1/2 h-full z-10 flex flex-col justify-center items-start px-6 lg:px-20 text-left"
+            className="relative w-[65%] lg:w-1/2 h-full z-0 flex flex-col justify-center items-start px-6 lg:px-20 text-left"
           >
             <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight uppercase">
               Quality Security <br />{" "}
