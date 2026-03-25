@@ -7,7 +7,13 @@ export default async function handler(req, res) {
 
   const { name, email, phone, service, message, ticketId } = req.body;
 
-  // Basic Validation
+  // 1. Check for API Key
+  if (!process.env.SENDGRID_API_KEY) {
+    console.error('ERROR: SENDGRID_API_KEY is not defined in environment variables.');
+    return res.status(500).json({ error: 'Server configuration error: Missing API Key.' });
+  }
+
+  // 2. Basic Validation
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Missing required fields: name, email, or message' });
   }
@@ -16,7 +22,7 @@ export default async function handler(req, res) {
 
   const msg = {
     to: 'doctor@formalize.co.za',
-    from: 'admin@elokprojects.co.za', // Ensure this email or domain is verified in SendGrid
+    from: 'admin@elomkprojects.co.za', // Corrected domain (added the 'm')
     replyTo: email,
     templateId: 'd-3fcfa1a0fc4742a1a21120359c476397',
     dynamicTemplateData: {
