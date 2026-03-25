@@ -21,8 +21,8 @@ export default async function handler(req, res) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   const msg = {
-    to: 'doctor@formalize.co.za',
-    from: 'doctor@formalize.co.za', // Using your verified sender identity
+    to: 'admin@elomkprojects.co.za',
+    from: 'admin@elomkprojects.co.za', // Assuming this is now verified in SendGrid
     replyTo: email, // This ensures when you click 'Reply', it goes to the customer
     templateId: 'd-3fcfa1a0fc4742a1a21120359c476397',
     dynamicTemplateData: {
