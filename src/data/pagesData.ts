@@ -49,10 +49,5 @@ export const corporateData = {
     title: 'Privacy Policy',
     subtitle: 'We respect your privacy and protect your information.',
     description: 'We follow standard privacy practices to ensure your personal and project information is kept safe.'
-  },
-  'compliance': {
-    title: 'Compliance',
-    subtitle: 'Working according to industry standards and regulations.',
-    description: 'ELOMK Projects follows all relevant safety and industry regulations to ensure quality and legal compliance.'
   }
 };
