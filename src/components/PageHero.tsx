@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 interface PageHeroProps {
   title: string;
@@ -26,12 +27,12 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
   // Parallax transforms
   const yImage = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
   const yText = useTransform(smoothProgress, [0, 1], ["0%", "15%"]);
-  const opacityText = useTransform(smoothProgress, [0, 1], [1, 0.5]);
+  const opacityText = useTransform(smoothProgress, [0, 1], [1, 0]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative pt-48 pb-32 overflow-hidden text-[var(--text-main)] transition-colors duration-500 bg-[var(--bg-primary)] z-20"
+      className="relative h-screen min-h-[600px] w-full overflow-hidden text-[var(--text-main)] transition-colors duration-500 bg-[var(--bg-primary)] z-20 flex items-center"
     >
       {image && (
         <motion.div 
@@ -75,6 +76,22 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
           </motion.div>
         </div>
       </div>
+
+      {/* Animated Scroll Indicator */}
+      <motion.div
+        style={{ opacity: opacityText }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
+      >
+        <span className="text-[8px] font-rajdhani font-bold text-cyan/40 uppercase tracking-[0.3em]">      
+          Explore
+        </span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-4 h-4 text-cyan/40" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

@@ -519,7 +519,7 @@ const Homepage = () => {
       {/* Hero Section */}
       <div
         ref={heroRef}
-        className="relative h-[130vh] z-10 text-[var(--text-main)]"
+        className="relative h-screen z-10 text-[var(--text-main)]"
       >
         <main className="sticky top-0 h-screen w-full overflow-hidden flex flex-row">
           {/* Left Side: Text and CTA */}

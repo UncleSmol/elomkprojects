@@ -114,10 +114,12 @@ const ServicesOverview = () => {
         image={servicesHeroImg}
       />
 
-      <section className="relative z-30">
-        {Object.entries(servicesData).map(([path, service], i) => (
-          <ServiceStrip key={path} service={{ ...service, path }} index={i} />
-        ))}
+      <section className="relative z-30 container mx-auto px-6 py-24 md:py-32">
+        <div className="space-y-32 md:space-y-0">
+          {Object.entries(servicesData).map(([path, service], i) => (
+            <ServiceStrip key={path} service={{ ...service, path }} index={i} />
+          ))}
+        </div>
       </section>
 
       <section className="container mx-auto px-6 mt-32">

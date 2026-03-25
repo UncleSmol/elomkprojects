@@ -212,6 +212,15 @@ const ContactPage = () => {
                 </div>
               </div>
             </div>
+
+            {/* Map Integration */}
+            <div className="mt-16">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-8 h-px bg-cyan/40" />
+                <span className="text-[8px] uppercase font-rajdhani font-bold text-cyan tracking-[0.4em]">Location Data</span>
+              </div>
+              <Map />
+            </div>
           </div>
 
           {/* Form Column */}
@@ -328,22 +337,6 @@ const ContactPage = () => {
                     type="submit"
                     disabled={status === 'submitting'}
                     className="w-full py-5 bg-indigo hover:bg-indigo/80 disabled:opacity-50 text-white font-rajdhani font-bold text-xs tracking-[0.3em] uppercase rounded shadow-[0_10px_30px_rgba(34,17,119,0.3)] active:scale-95 transition-all flex items-center justify-center gap-3"
-                  >
-                    {status === 'submitting' ? 'Transmitting...' : 'Initiate Transmission'} <Send className="w-4 h-4" />
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-
-        </motion.div>
-      </section>
-    </div>
-  );
-};
-
-export default ContactPage;
-
                   >
                     {status === 'submitting' ? 'Transmitting...' : 'Initiate Transmission'} <Send className="w-4 h-4" />
                   </button>
