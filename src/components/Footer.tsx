@@ -2,9 +2,7 @@ import {
   MapPin,
   Phone,
   Mail,
-  Linkedin,
-  Facebook,
-  Instagram,
+  MessageSquare,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Elomk - Logo PNG2.png";
@@ -23,19 +21,14 @@ const Footer = () => (
               <img src={Logo} alt="ELOMK Projects Logo" className="w-full h-full object-contain" />
             </div>
           </Link>
-          <p className="text-[var(--text-muted)] text-xs leading-relaxed max-w-xs mb-8">
-            Professional security and technical services. Serving Witbank and surrounding areas with reliable workmanship since our inception.
+          <p className="text-[var(--text-muted)] text-xs leading-relaxed max-w-xs mb-8 uppercase">
+            Professional security and technical services. Serving Emalahleni and surrounding areas with reliable workmanship.
           </p>
-          <div className="flex gap-4">
-            {[Linkedin, Facebook, Instagram].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="w-10 h-10 bg-white/[0.03] border border-[var(--border-color)] rounded flex items-center justify-center text-[var(--text-muted)] hover:text-cyan hover:border-cyan/30 transition-all"
-              >
-                <Icon className="w-4 h-4" />
-              </a>
-            ))}
+          <div className="space-y-2 text-[10px] text-[var(--text-muted)] font-bold tracking-widest uppercase">
+            <div className="text-cyan">ELOMK PROJECTS (Pty)Ltd</div>
+            <div>REG: 2018/486342/07</div>
+            <div>INCOME TAX: 9643583173</div>
+            <div>VAT NO: 4590299659</div>
           </div>
         </div>
 
@@ -87,24 +80,28 @@ const Footer = () => (
         {/* Contact Column */}
         <div>
           <h3 className="text-[var(--text-main)] text-xs font-bold tracking-[0.4em] mb-8 uppercase text-[var(--text-main)]">
-            Witbank HQ
+            Head Office
           </h3>
           <div className="space-y-6 text-[10px] text-[var(--text-muted)] font-medium tracking-widest uppercase text-[var(--text-main)]">
             <div className="flex items-start gap-4">
               <MapPin className="w-4 h-4 text-cyan mt-0.5" />
               <span>
-                Witbank, Mpumalanga
+                84310 Market Street
                 <br />
-                South Africa
+                Emalahleni 1035
               </span>
             </div>
             <div className="flex items-center gap-4">
               <Phone className="w-4 h-4 text-cyan" />
-              <span>+27 00 000 0000</span>
+              <span>013 001 1983</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <MessageSquare className="w-4 h-4 text-cyan" />
+              <span>+27 76 011 3690 (WA)</span>
             </div>
             <div className="flex items-center gap-4">
               <Mail className="w-4 h-4 text-cyan" />
-              <span>info@elomkprojects.co.za</span>
+              <span>admin@elokprojects.co.za</span>
             </div>
           </div>
         </div>

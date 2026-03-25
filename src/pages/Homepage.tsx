@@ -6,7 +6,7 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import electricFencingImg from "../assets/electrical-fencing-service.png";
 import plumbingImg from "../assets/plumbing-service.jpg";
@@ -15,6 +15,7 @@ import gateServiceImg from "../assets/gate-automation-service.png";
 import installProcessImg from "../assets/installation-process.jpg";
 import testingProcessImg from "../assets/testing-process.png";
 import supportProcessImg from "../assets/support-process.jpg";
+import workflowBgImg from "../assets/installation-workflow.jpg";
 
 /* --- SUB-COMPONENTS --- */
 
@@ -43,12 +44,14 @@ const ServiceCard = React.memo(({
   img,
   speed,
   index,
+  path,
 }: {
   title: string;
   desc: string;
   img: string;
   speed: number;
   index: number;
+  path: string;
 }) => {
   const cardRef = useRef(null);
 
@@ -79,7 +82,7 @@ const ServiceCard = React.memo(({
     <motion.article
       ref={cardRef}
       style={{ y, opacity, scale }}
-      className="group relative h-[400px] md:h-[500px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] uppercase text-[var(--text-main)] shadow-2xl will-change-transform"       
+      className="group relative h-[450px] md:h-[550px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] uppercase text-[var(--text-main)] shadow-2xl will-change-transform"       
     >
       {/* Background Image with Hover Effect */}
       <div className="absolute inset-0 z-0">
@@ -103,9 +106,17 @@ const ServiceCard = React.memo(({
         <h3 className="font-rajdhani font-bold text-2xl md:text-3xl mb-3 uppercase tracking-tight">
           {title}
         </h3>
-        <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed font-medium max-w-xs normal-case">
+        <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed font-medium max-w-xs mb-8 normal-case">
           {desc}
         </p>
+        
+        <Link 
+          to={`/services#${path}`} 
+          className="w-fit px-6 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 group/btn flex items-center gap-2"
+        >
+          View Service Details
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan shadow-[0_0_10px_cyan] group-hover/btn:scale-125 transition-transform" />
+        </Link>
       </div>
     </motion.article>
   );
@@ -117,6 +128,8 @@ const ServiceCard = React.memo(({
  * Slides in from the right as the user scrolls.
  */
 const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, index: number, scrollYProgress: any }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // Define active range for this step based on its index
   const start = (index + 1) * 0.2;
   const end = start + 0.2;
@@ -145,43 +158,112 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
     return () => clearInterval(timer);
   }, [step.images.length]);
 
-  return (
-    <motion.div
-      style={{ x, boxShadow: shadow, zIndex: 20 + index }}
-      className="absolute inset-0 h-screen w-screen overflow-hidden bg-[var(--bg-primary)] border-l border-[var(--border-color)] text-[var(--text-main)] will-change-transform"
-    >
-      {/* Dynamic Background Image with AnimatePresence for smooth swapping */}
-      <div className="absolute inset-0 opacity-30">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentImg}
-            src={step.images[currentImg].includes("unsplash.com") ? `${step.images[currentImg]}&auto=format&fit=crop&q=60&w=1200` : step.images[currentImg]}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover dark:grayscale"
-            alt=""
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)]" />
-      </div>
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
-      {/* Step Text Content */}
-      <div className="relative z-20 h-full w-full flex flex-col justify-center items-center px-6 text-center">  
-        <div className="max-w-4xl">
-          <span className="text-[10px] md:text-xs font-rajdhani font-bold text-cyan uppercase mb-4 block">      
-            {step.tag}
-          </span>
-          <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight uppercase">
-            {step.title}
-          </h3>
-          <p className="text-base md:text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium leading-relaxed">
-            {step.desc}
-          </p>
+  return (
+    <>
+      <motion.div
+        style={{ x, boxShadow: shadow, zIndex: 20 + index }}
+        className="absolute inset-0 h-screen w-screen overflow-hidden bg-[var(--bg-primary)] border-l border-[var(--border-color)] text-[var(--text-main)] will-change-transform"
+      >
+        {/* Dynamic Background Image with AnimatePresence for smooth swapping */}
+        <div className="absolute inset-0 opacity-30">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentImg}
+              src={step.images[currentImg].includes("unsplash.com") ? `${step.images[currentImg]}&auto=format&fit=crop&q=60&w=1200` : step.images[currentImg]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover dark:grayscale"
+              alt=""
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-transparent" />
         </div>
-      </div>
-    </motion.div>
+
+        {/* Step Text Content */}
+        <div className="relative z-20 h-full w-full flex flex-col justify-center items-center px-6 text-center">  
+          <div className="max-w-4xl">
+            <span className="text-[10px] md:text-xs font-rajdhani font-bold text-cyan uppercase mb-4 block">      
+              {step.tag}
+            </span>
+            <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight uppercase">
+              {step.title}
+            </h3>
+            <p className="text-base md:text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+              {step.desc}
+            </p>
+            
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="px-8 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 flex items-center gap-3 mx-auto group/btn"
+            >
+              System Deep Dive
+              <div className="w-2 h-2 rounded-full bg-cyan shadow-[0_0_10px_cyan] group-hover/btn:scale-125 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Modal Overlay */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
+              
+              <div className="flex justify-between items-start mb-8">
+                <div>
+                  <span className="text-[10px] font-rajdhani font-bold text-cyan uppercase tracking-widest mb-2 block">{step.tag} Detail</span>
+                  <h4 className="text-2xl md:text-4xl font-bold uppercase tracking-tight">{step.title} Strategy</h4>
+                </div>
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-[var(--text-main)]"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="grid gap-6">
+                {step.details.map((detail: string, i: number) => (
+                  <div key={i} className="flex gap-4 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan mt-2 shrink-0 shadow-[0_0_10px_cyan] group-hover:scale-125 transition-transform" />
+                    <p className="text-[var(--text-muted)] text-sm md:text-base leading-relaxed uppercase tracking-wide">
+                      {detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 });
 
@@ -206,9 +288,7 @@ const WorkflowSection = () => {
   const [currentBg, setCurrentBg] = useState(0);
 
   const bgImages = [
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200",
-    "https://images.unsplash.com/photo-1580777361964-27e9cdd2f838?q=80&w=1200",
-    "https://images.unsplash.com/photo-1604688336644-e3cc785062ef?q=80&w=1200"
+    workflowBgImg
   ];
 
   // Auto-cycle background images for a dynamic look
@@ -226,24 +306,48 @@ const WorkflowSection = () => {
       desc: "We assess your needs and plan the best setup for your property.",
       images: ["https://images.unsplash.com/photo-1590402494756-10c265b9d736?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"],
       tag: "PHASE 01",
+      details: [
+        "On-site site assessment to identify security vulnerabilities.",
+        "Custom technical drawing of the proposed installation layout.",
+        "Clear, itemized quotation with SABS-approved materials.",
+        "Consultation on legal compliance for fencing and CCTV."
+      ]
     },
     {
       title: "Install",
       desc: "Our team handles the professional installation of all equipment.",
       images: [installProcessImg],
       tag: "PHASE 02",
+      details: [
+        "Professional wiring and bracket mounting by local experts.",
+        "System configuration including mobile app setup where applicable.",
+        "Structural reinforcement for gate motors and fence posts.",
+        "Clean and tidy site management throughout the process."
+      ]
     },
     {
       title: "Test",
       desc: "We thoroughly test every system to ensure it works perfectly.",
       images: [testingProcessImg],
       tag: "PHASE 03",
+      details: [
+        "Live stress testing of gate motors and sensors.",
+        "High-voltage pulse check for electric fencing integrity.",
+        "Camera angle optimization and night-vision verification.",
+        "Full client handover with system operation tutorial."
+      ]
     },
     {
       title: "Support",
       desc: "We provide ongoing support and maintenance when you need it.",
       images: [supportProcessImg],
       tag: "PHASE 04",
+      details: [
+        "Fast-response technical support for system issues.",
+        "Regular maintenance plans to prevent hardware failure.",
+        "Equipment warranty management and SABS compliance checks.",
+        "Local standby team for emergency repairs in Emalahleni."
+      ]
     },
   ], []);
 
@@ -272,7 +376,7 @@ const WorkflowSection = () => {
               alt=""
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)] opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-transparent opacity-80" />
         </div>
 
         {/* Dynamic Progress Indicator at Bottom */}
@@ -374,24 +478,28 @@ const Homepage = () => {
   const services = useMemo(
     () => [
       {
+        path: "electric-fencing",
         title: "Electric Fencing",
         desc: "Secure perimeter fencing for your home.",
         img: electricFencingImg,
         speed: 1.2,
       },
       {
+        path: "cctv-installations",
         title: "CCTV Systems",
         desc: "Reliable camera installations and setup.",
         img: cctvServiceImg,
         speed: 0.8,
       },
       {
+        path: "gate-automation",
         title: "Gate Automation",
         desc: "Gate motors and garage door repairs.",
         img: gateServiceImg,
         speed: 1.5,
       },
       {
+        path: "plumbing",
         title: "Plumbing",
         desc: "Professional plumbing repairs and services.",
         img: plumbingImg,
@@ -424,9 +532,9 @@ const Homepage = () => {
               <Link to="/contact" className="px-10 py-4 bg-indigo hover:bg-indigo/80 text-white font-rajdhani font-bold tracking-widest uppercase rounded transition-all shadow-[0_4px_20px_rgba(46,42,160,0.4)] active:scale-95 text-center">
                 Get A Quote
               </Link>
-              <button className="px-10 py-4 border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:text-[var(--bg-primary)] text-[var(--text-main)] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95">
-                Call Us
-              </button>
+              <a href="tel:0130011983" className="px-10 py-4 border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:text-[var(--bg-primary)] text-[var(--text-main)] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 text-center">
+                Call: 013 001 1983
+              </a>
             </div>
             {/* Trust Badges */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-[var(--text-main)]">

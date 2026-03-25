@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -9,6 +9,21 @@ import contactHeroImg from '../assets/contact-hero.jpg';
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
   const initialService = searchParams.get('service');
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: contentRef,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const yContent = useTransform(smoothProgress, [0, 1], ["5%", "-5%"]);
+  const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -71,7 +86,7 @@ const ContactPage = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const WHATSAPP_NUMBER = "+27000000000"; // Replace with actual number
+  const WHATSAPP_NUMBER = "+27760113690"; 
 
   const whatsappTemplates = [
     { label: "General Inquiry", message: "Hi Elomk Projects, I'd like to inquire about your services." },
@@ -81,7 +96,7 @@ const ContactPage = () => {
 
   const handleWhatsAppClick = (message: string) => {
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace('+', '').replace(/\s/g, '')}?text=${encodedMessage}`, '_blank');
   };
 
   return (
@@ -94,15 +109,13 @@ const ContactPage = () => {
         image={contactHeroImg}
       />
 
-      <section className="relative z-20 container mx-auto px-6 py-24 md:py-32">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 overflow-hidden lg:overflow-visible">
+      <section ref={contentRef} className="relative z-20 container mx-auto px-6 py-24 md:py-32">
+        <motion.div 
+          style={{ y: yContent, opacity }}
+          className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 overflow-hidden lg:overflow-visible"
+        >
           
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="flex flex-col">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-px bg-cyan/40" />
               <span className="text-[10px] uppercase font-rajdhani font-bold text-cyan tracking-[0.4em]">Command Center</span>
@@ -156,9 +169,9 @@ const ContactPage = () => {
                   <MapPin className="w-5 h-5 text-cyan" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Witbank HQ</h4>
+                  <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Head Office</h4>
                   <p className="text-[var(--text-muted)] text-xs leading-relaxed uppercase">
-                    Witbank, Mpumalanga<br />South Africa
+                    84310 Market Street<br />Emalahleni 1035
                   </p>
                 </div>
               </div>
@@ -170,7 +183,7 @@ const ContactPage = () => {
                 <div>
                   <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Direct Link</h4>
                   <p className="text-[var(--text-muted)] text-xs leading-relaxed uppercase">
-                    +27 00 000 0000<br />+27 00 000 0000
+                    013 001 1983<br />+27 76 011 3690
                   </p>
                 </div>
               </div>
@@ -182,21 +195,15 @@ const ContactPage = () => {
                 <div>
                   <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Email Channel</h4>
                   <p className="text-[var(--text-muted)] text-xs leading-relaxed lowercase">
-                    info@elomkprojects.co.za
+                    admin@elokprojects.co.za
                   </p>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Form Column */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="absolute -inset-4 bg-indigo/5 blur-3xl rounded-full" />
             <div className="relative bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-8 md:p-12 shadow-2xl transition-colors duration-500">
               <div className="flex justify-between items-center mb-8">
@@ -295,9 +302,9 @@ const ContactPage = () => {
                 </form>
               )}
             </div>
-          </motion.div>
+          </div>
 
-        </div>
+        </motion.div>
       </section>
     </div>
   );

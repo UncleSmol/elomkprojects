@@ -27,7 +27,7 @@ const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
   const isEven = index % 2 === 0;
 
   return (
-    <div ref={containerRef} className="relative min-h-screen w-full overflow-hidden py-24 md:py-0 flex items-center">
+    <div id={service.path} ref={containerRef} className="relative min-h-screen w-full overflow-hidden py-24 md:py-0 flex items-center">
       <motion.div 
         style={{ opacity, scale }}
         className="container mx-auto h-full px-6"
@@ -111,7 +111,7 @@ const ServicesOverview = () => {
 
       <section className="relative z-30">
         {Object.entries(servicesData).map(([path, service], i) => (
-          <ServiceStrip key={path} service={service} index={i} />
+          <ServiceStrip key={path} service={{ ...service, path }} index={i} />
         ))}
       </section>
 
