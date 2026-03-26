@@ -209,6 +209,7 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
             
             <button 
               onClick={() => setIsModalOpen(true)}
+              aria-haspopup="dialog"
               className="px-8 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 flex items-center gap-3 mx-auto group/btn"
             >
               System Deep Dive
@@ -233,6 +234,9 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
               className="relative w-full max-w-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
@@ -240,10 +244,11 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <span className="text-[10px] font-rajdhani font-bold text-cyan uppercase tracking-widest mb-2 block">{step.tag} Detail</span>
-                  <h4 className="text-2xl md:text-4xl font-bold uppercase tracking-tight">{step.title} Strategy</h4>
+                  <h4 id="modal-title" className="text-2xl md:text-4xl font-bold uppercase tracking-tight">{step.title} Strategy</h4>
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(false)}
+                  aria-label="Close dialog"
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-[var(--text-main)]"
                 >
                   <X className="w-5 h-5" />
@@ -514,7 +519,44 @@ const Homepage = () => {
     <>
       <SEO 
         title="ELOMK Projects | Quality Security & Technical Services" 
-        description="Professional security installations, CCTV systems, electric fencing, and technical maintenance services based in Emalahleni." 
+        description="Professional security installations, CCTV systems, electric fencing, and technical maintenance services based in Emalahleni."
+        schema={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "ELOMK Projects (Pty) Ltd",
+          description: "Professional security and technical services. Serving Emalahleni and surrounding areas with reliable workmanship.",
+          url: "https://www.elomkprojects.co.za",
+          telephone: "+27-13-001-1983",
+          email: "admin@elomkprojects.co.za",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "84310 Market Street",
+            addressLocality: "Emalahleni",
+            postalCode: "1035",
+            addressCountry: "ZA"
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: -25.8738,
+            longitude: 29.2320
+          },
+          openingHoursSpecification: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "08:00",
+            closes: "17:00"
+          },
+          serviceArea: {
+            "@type": "GeoCircle",
+            geoMidpoint: {
+              "@type": "GeoCoordinates",
+              latitude: -25.8738,
+              longitude: 29.2320
+            },
+            geoRadius: "50000"
+          },
+          sameAs: []
+        })}
       />
       {/* Hero Section */}
       <div
@@ -556,6 +598,7 @@ const Homepage = () => {
               style={{ scale: imageScale }}
               src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200"  
               className="w-full h-full object-cover group-hover:scale-110 grayscale opacity-100 transition-all duration-1000"
+              alt="Security camera and electric fence installation" loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-transparent to-transparent transition-colors duration-500" />
           </div>
