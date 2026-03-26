@@ -78,10 +78,10 @@ const ServiceStrip = ({ service, index }: { service: any, index: number }) => {
             >
               <img 
                 src={service.image.includes('unsplash.com') ? `${service.image}&auto=format&fit=crop&q=60&w=1200` : service.image}
-                className="w-full h-full object-cover dark:grayscale opacity-40 hover:grayscale-0 transition-all duration-1000"
+                className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-1000"
                 alt={service.title}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-overlay)] via-transparent to-transparent" />
             </motion.div>
 
             {/* Background Number moved to front with higher z-index */}

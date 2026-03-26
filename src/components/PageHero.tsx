@@ -32,7 +32,7 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
   return (
     <section 
       ref={containerRef}
-      className="relative h-screen min-h-[600px] w-full overflow-hidden text-[var(--text-main)] transition-colors duration-500 bg-[var(--bg-primary)] z-20 flex items-center"
+      className={`relative h-screen min-h-[600px] w-full overflow-hidden transition-colors duration-500 bg-[var(--bg-primary)] z-20 flex items-center ${image ? 'text-white' : 'text-[var(--text-main)]'}`}
     >
       {image && (
         <motion.div 
@@ -46,7 +46,7 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
           />
           {/* Stronger overlay for better text contrast */}
           <div className="absolute inset-0 bg-black/60 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)]/80 via-transparent to-[var(--bg-primary)] z-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black z-20" />
         </motion.div>
       )}
 
@@ -66,11 +66,11 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
             <h1 className="text-5xl md:text-8xl font-bold mb-12 tracking-tighter leading-none uppercase">
               {title} <br />
               {italicTitle && (
-                <span className="text-[var(--text-muted)] italic text-4xl md:text-7xl">{italicTitle}</span>
+                <span className={`italic text-4xl md:text-7xl ${image ? 'text-white/60' : 'text-[var(--text-muted)]'}`}>{italicTitle}</span>
               )}
             </h1>
             
-            <p className="text-[var(--text-muted)] text-lg md:text-xl font-medium max-w-2xl leading-relaxed uppercase">
+            <p className={`text-lg md:text-xl font-medium max-w-2xl leading-relaxed uppercase ${image ? 'text-white/70' : 'text-[var(--text-muted)]'}`}>
               {subtitle}
             </p>
           </motion.div>

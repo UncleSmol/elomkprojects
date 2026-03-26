@@ -94,10 +94,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-[100] transition-all duration-500 border-b ${
-        isScrolled
-          ? "bg-[var(--bg-secondary)]/80 backdrop-blur-xl border-[var(--border-color)] py-4 shadow-2xl"
-          : "bg-transparent border-transparent py-8"
+      className={`fixed top-0 w-full z-[100] transition-all duration-500 border-b bg-white backdrop-blur-xl border-b-[#e2e8f0] ${
+        isScrolled ? "py-4 shadow-[0_4px_24px_rgba(0,0,0,0.12)]" : "py-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -119,7 +117,7 @@ const Navbar = () => {
                     <a
                       href={link.href}
                       className={`font-rajdhani font-bold text-xs uppercase tracking-[0.2em] transition-all relative block py-2 ${
-                        active ? "text-cyan" : "text-[var(--text-muted)] hover:text-cyan"
+                        active ? "text-cyan" : "text-[#221177] hover:text-cyan"
                       }`}
                     >
                       {link.name}
@@ -129,7 +127,7 @@ const Navbar = () => {
                     <Link
                       to={link.href}
                       className={`font-rajdhani font-bold text-xs uppercase tracking-[0.2em] transition-all relative block py-2 ${
-                        active ? "text-cyan" : "text-[var(--text-muted)] hover:text-cyan"
+                        active ? "text-cyan" : "text-[#221177] hover:text-cyan"
                       }`}
                     >
                       {link.name}
@@ -141,21 +139,15 @@ const Navbar = () => {
             })}
           </ul>
 
-          {/* Theme Toggle and Quote CTA (Desktop) */}
-          <div className="flex items-center gap-6">
+          {/* Theme Toggle (Desktop) */}
+          <div className="flex items-center">
             <button 
               onClick={toggleTheme}
-              className="p-2 text-[var(--text-muted)] hover:text-cyan transition-colors"
+              className="p-2 text-[#221177] hover:text-cyan transition-colors"
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
-            <Link
-              to="/contact"
-              className="px-6 py-2 border border-cyan/30 bg-cyan/5 hover:bg-cyan hover:text-[var(--bg-secondary)] text-cyan font-rajdhani font-bold text-xs tracking-[0.2em] uppercase rounded transition-all shadow-[0_0_20px_rgba(70,179,211,0.1)] active:scale-95"
-            >
-              Get A Quote
-            </Link>
           </div>
         </div>
 
@@ -163,13 +155,13 @@ const Navbar = () => {
         <div className="lg:hidden flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            className="p-2 text-[var(--text-muted)] hover:text-cyan transition-colors"
+            className="p-2 text-[#221177] hover:text-cyan transition-colors"
             aria-label="Toggle Theme"
           >
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button
-            className={`menu-btn text-[var(--text-main)] hover:text-cyan transition-colors z-[110] ${mobileMenuOpen ? 'opened' : ''}`}
+            className={`menu-btn text-[#221177] hover:text-cyan transition-colors z-[110] ${mobileMenuOpen ? 'opened' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Main Menu"
             aria-expanded={mobileMenuOpen}
@@ -192,7 +184,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 h-screen w-screen bg-[var(--bg-secondary)] z-[90] lg:hidden flex flex-col items-start justify-center"
+            className="fixed inset-0 h-screen w-screen bg-white z-[90] lg:hidden flex flex-col items-start justify-center"
           >
             <div className="px-12 py-24 flex flex-col gap-10 text-left uppercase w-full max-h-screen overflow-y-auto">
               {navLinks.map((link) => {
@@ -203,7 +195,7 @@ const Navbar = () => {
                       <Link
                         to={link.href}
                         className={`font-rajdhani font-bold text-4xl uppercase tracking-[0.4em] transition-all ${
-                          active ? "text-cyan" : "text-[var(--text-main)] hover:text-cyan"
+                          active ? "text-cyan" : "text-[#221177] hover:text-cyan"
                         }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -213,13 +205,7 @@ const Navbar = () => {
                   </div>
                 );
               })}
-              <Link
-                to="/contact"
-                className="w-full py-5 bg-indigo text-white font-rajdhani font-bold text-sm tracking-[0.3em] uppercase rounded shadow-2xl mt-8 text-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get A Quote
-              </Link>
+
             </div>
           </motion.div>
         )}

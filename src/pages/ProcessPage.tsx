@@ -61,10 +61,10 @@ const ProcessStep = ({ image, title, subtitle, desc, index }: { image: string, t
           >
             <img 
               src={imgSrc} 
-              className="w-full h-full object-cover dark:grayscale opacity-40 hover:grayscale-0 transition-all duration-1000" 
+              className="w-full h-full object-cover dark:grayscale opacity-90 hover:grayscale-0 transition-all duration-1000" 
               alt={title} 
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-overlay)] via-transparent to-transparent" />
           </motion.div>
 
           {/* Decorative Number */}

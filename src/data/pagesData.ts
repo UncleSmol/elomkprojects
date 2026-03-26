@@ -1,5 +1,5 @@
 import electricFencingImg from '../assets/electrical-fencing-service.png';
-import cctvImg from '../assets/cctv-installation-service.png';
+const cctvImg = "https://wekaelectrical.co.nz/wp-content/uploads/2025/01/How-to-install-cctv-camera-weka-electrical.webp";
 import gateImg from '../assets/gate-automation-service.png';
 import plumbingImg from '../assets/plumbing-service.jpg';
 

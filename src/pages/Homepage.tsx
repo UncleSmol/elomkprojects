@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import electricFencingImg from "../assets/electrical-fencing-service.png";
 import plumbingImg from "../assets/plumbing-service.jpg";
-import cctvServiceImg from "../assets/cctv-installation-service.png";
+const cctvServiceImg = "https://images.pexels.com/photos/5650141/pexels-photo-5650141.jpeg";
 import gateServiceImg from "../assets/gate-automation-service.png";
 import installProcessImg from "../assets/installation-process.jpg";
 import testingProcessImg from "../assets/testing-process.png";
@@ -83,7 +83,7 @@ const ServiceCard = React.memo(({
     <motion.article
       ref={cardRef}
       style={{ y, opacity, scale }}
-      className="group relative h-[450px] md:h-[550px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-secondary)] uppercase text-[var(--text-main)] shadow-2xl will-change-transform"       
+      className="group relative h-[450px] md:h-[550px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-overlay)] uppercase text-white shadow-2xl will-change-transform"       
     >
       {/* Background Image with Hover Effect */}
       <div className="absolute inset-0 z-0">
@@ -91,13 +91,13 @@ const ServiceCard = React.memo(({
           src={imgSrc}
           alt={title}
           loading="lazy"
-          className="w-full h-full object-cover dark:grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out"
+          className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-overlay)] via-transparent to-transparent z-10" />
       </div>
 
       {/* Card Content Overlay */}
-      <div className="relative z-20 h-full flex flex-col justify-end p-8 text-left text-[var(--text-main)]">    
+      <div className="relative z-20 h-full flex flex-col justify-end p-8 text-left text-white">    
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-px bg-cyan/50" />
           <span className="text-[10px] uppercase font-rajdhani text-cyan font-bold">
@@ -107,7 +107,7 @@ const ServiceCard = React.memo(({
         <h3 className="font-rajdhani font-bold text-2xl md:text-3xl mb-3 uppercase tracking-tight">
           {title}
         </h3>
-        <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed font-medium max-w-xs mb-8 normal-case">
+        <p className="text-sm md:text-base text-white/70 leading-relaxed font-medium max-w-xs mb-8 normal-case">
           {desc}
         </p>
         
@@ -175,23 +175,23 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
     <>
       <motion.div
         style={{ x, boxShadow: shadow, zIndex: 20 + index }}
-        className="absolute inset-0 h-screen w-screen overflow-hidden bg-[var(--bg-primary)] border-l border-[var(--border-color)] text-[var(--text-main)] will-change-transform"
+        className="absolute inset-0 h-screen w-screen overflow-hidden bg-[var(--bg-overlay)] border-l border-[var(--border-color)] text-white will-change-transform"
       >
         {/* Dynamic Background Image with AnimatePresence for smooth swapping */}
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0">
           <AnimatePresence mode="wait">
             <motion.img
               key={currentImg}
               src={step.images[currentImg].includes("unsplash.com") ? `${step.images[currentImg]}&auto=format&fit=crop&q=60&w=1200` : step.images[currentImg]}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 0.85 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover dark:grayscale"
+              className="absolute inset-0 w-full h-full object-cover grayscale"
               alt=""
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-overlay)] via-transparent to-transparent z-10" />
         </div>
 
         {/* Step Text Content */}
@@ -203,7 +203,7 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
             <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight uppercase">
               {step.title}
             </h3>
-            <p className="text-base md:text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+            <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
               {step.desc}
             </p>
             
@@ -370,14 +370,14 @@ const WorkflowSection = () => {
               key={currentBg}
               src={bgImages[currentBg]}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.25 }}
+              animate={{ opacity: 0.85 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover dark:grayscale"
+              className="absolute inset-0 w-full h-full object-cover grayscale"
               alt=""
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-transparent opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-overlay)] via-transparent to-transparent z-10" />
         </div>
 
         {/* Dynamic Progress Indicator at Bottom */}
@@ -417,7 +417,7 @@ const WorkflowSection = () => {
         {/* Initial "Installation Workflow" Text */}
         <motion.div
           style={{ opacity: introOpacity, scale: introScale }}
-          className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 overflow-hidden z-10 text-[var(--text-main)] will-change-transform transition-colors duration-500"
+          className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 overflow-hidden z-10 text-white will-change-transform transition-colors duration-500"
         >
           <div className="relative z-20 max-w-3xl">
             <div className="flex items-center gap-4 mb-4">
@@ -425,9 +425,9 @@ const WorkflowSection = () => {
               <span className="text-[10px] uppercase font-rajdhani font-bold text-cyan">Our Process</span>      
             </div>
             <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight uppercase">
-              Installation <span className="text-[var(--text-muted)] italic">Workflow</span>
+              Installation <span className="text-white/60 italic">Workflow</span>
             </h2>
-            <p className="text-[var(--text-muted)] font-medium leading-relaxed max-w-xl text-lg text-left">     
+            <p className="text-white/70 font-medium leading-relaxed max-w-xl text-lg text-left">     
               A simple and reliable way to get your property secured.
             </p>
             <div className="mt-12 flex items-center gap-4 text-[10px] font-rajdhani uppercase text-cyan/60 font-bold">
@@ -555,9 +555,9 @@ const Homepage = () => {
             <motion.img
               style={{ scale: imageScale }}
               src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=1200"  
-              className="w-full h-full object-cover group-hover:scale-110 opacity-100 transition-all duration-1000"
+              className="w-full h-full object-cover group-hover:scale-110 grayscale opacity-100 transition-all duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-[var(--bg-primary)]/40 via-transparent to-transparent transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-transparent to-transparent transition-colors duration-500" />
           </div>
 
           {/* Animated Scroll Indicator */}

@@ -4,8 +4,22 @@
 
 @layer base {
   :root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-overlay: #1e293b;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --glow-opacity: 0.2;
+    --grid-opacity: 0.4;
+    --color-accent: #221177;
+    --color-accent-rgb: 34, 17, 119;
+  }
+
+  :root.dark {
     --bg-primary: #030617;
     --bg-secondary: #010208;
+    --bg-overlay: #030617;
     --text-main: #eeedf8;
     --text-muted: rgba(238, 237, 248, 0.55);
     --border-color: rgba(255, 255, 255, 0.05);

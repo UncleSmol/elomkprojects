@@ -2,8 +2,8 @@ import {
   MapPin,
   Phone,
   Mail,
-  MessageSquare,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Elomk - Logo PNG2.png";
 
@@ -17,27 +17,22 @@ const Footer = () => (
             to="/"
             className="flex items-center gap-3 mb-8 uppercase cursor-pointer group"
           >
-            <div className="w-12 h-12 flex items-center justify-center rounded transition-all">
+            <div className="w-24 h-24 flex items-center justify-center rounded transition-all">
               <img src={Logo} alt="ELOMK Projects Logo" className="w-full h-full object-contain" />
             </div>
           </Link>
-          <p className="text-[var(--text-muted)] text-xs leading-relaxed max-w-xs mb-8 uppercase">
+          <p className="text-[var(--text-muted)] text-clamp-xs leading-relaxed max-w-xs mb-8 uppercase">
             Professional security and technical services. Serving Emalahleni and surrounding areas with reliable workmanship.
           </p>
-          <div className="space-y-2 text-[10px] text-[var(--text-muted)] font-bold tracking-widest uppercase">
-            <div className="text-cyan">ELOMK PROJECTS (Pty)Ltd</div>
-            <div>REG: 2018/486342/07</div>
-            <div>INCOME TAX: 9643583173</div>
-            <div>VAT NO: 4590299659</div>
-          </div>
+
         </div>
 
         {/* Navigation Column */}
         <div>
-          <h3 className="text-[var(--text-main)] text-xs font-bold tracking-[0.4em] mb-8 uppercase">
+          <h3 className="text-[var(--text-main)] text-clamp-xs font-bold tracking-[0.4em] mb-8 uppercase">
             Quick Links
           </h3>
-          <ul className="space-y-4 text-[10px] text-[var(--text-muted)] font-medium tracking-widest uppercase">
+          <ul className="space-y-4 text-clamp-xs text-[var(--text-muted)] font-medium tracking-widest uppercase">
             <li>
               <Link to="/" className="hover:text-cyan transition-colors">Home</Link>
             </li>
@@ -58,10 +53,10 @@ const Footer = () => (
 
         {/* Corporate Column */}
         <div>
-          <h3 className="text-[var(--text-main)] text-xs font-bold tracking-[0.4em] mb-8 uppercase">
+          <h3 className="text-[var(--text-main)] text-clamp-xs font-bold tracking-[0.4em] mb-8 uppercase">
             Support
           </h3>
-          <ul className="space-y-4 text-[10px] text-[var(--text-muted)] font-medium tracking-widest uppercase">
+          <ul className="space-y-4 text-clamp-xs text-[var(--text-muted)] font-medium tracking-widest uppercase">
             <li>
               <Link to="/contact" className="hover:text-cyan transition-colors">Request A Quote</Link>
             </li>
@@ -79,10 +74,10 @@ const Footer = () => (
 
         {/* Contact Column */}
         <div>
-          <h3 className="text-[var(--text-main)] text-xs font-bold tracking-[0.4em] mb-8 uppercase text-[var(--text-main)]">
+          <h3 className="text-[var(--text-main)] text-clamp-xs font-bold tracking-[0.4em] mb-8 uppercase text-[var(--text-main)]">
             Head Office
           </h3>
-          <div className="space-y-6 text-[10px] text-[var(--text-muted)] font-medium tracking-widest uppercase text-[var(--text-main)]">
+          <div className="space-y-6 text-clamp-xs text-[var(--text-muted)] font-medium tracking-widest uppercase text-[var(--text-main)]">
             <div className="flex items-start gap-4">
               <MapPin className="w-4 h-4 text-cyan mt-0.5" />
               <span>
@@ -91,29 +86,29 @@ const Footer = () => (
                 Emalahleni 1035
               </span>
             </div>
-            <div className="flex items-center gap-4">
+            <a href="tel:0130011983" className="flex items-center gap-4 hover:text-cyan transition-colors">
               <Phone className="w-4 h-4 text-cyan" />
               <span>013 001 1983</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <MessageSquare className="w-4 h-4 text-cyan" />
-              <span>+27 76 011 3690 (WA)</span>
-            </div>
-            <div className="flex items-center gap-4">
+            </a>
+            <a href="https://wa.me/27760113690" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:text-cyan transition-colors">
+              <FaWhatsapp className="w-4 h-4 text-cyan" />
+              <span>+27 76 011 3690</span>
+            </a>
+            <a href="mailto:admin@elokprojects.co.za" className="flex items-center gap-4 hover:text-cyan transition-colors">
               <Mail className="w-4 h-4 text-cyan" />
               <span>admin@elokprojects.co.za</span>
-            </div>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="pt-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-8 text-[var(--text-main)]">
-        <div className="text-[8px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
+        <div className="text-[9px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
           &copy; {new Date().getFullYear()} ELOMK Projects (PTY) LTD. ALL RIGHTS
           RESERVED.
         </div>
-        <div className="flex items-center gap-8 text-[8px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
+        <div className="flex items-center gap-8 text-[9px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
           <div className="flex items-center gap-2">
             <div className="w-1 h-1 rounded-full bg-cyan animate-pulse" />{" "}
             SYSTEM: ONLINE
