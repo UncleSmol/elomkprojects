@@ -41,7 +41,7 @@ const PageHero = ({ title, italicTitle, subtitle, tag, image }: PageHeroProps) =
         >
           <img 
             src={image.includes('unsplash.com') ? `${image}&auto=format&fit=crop&q=60&w=1600` : image} 
-            className="w-full h-[120%] object-cover scale-110" 
+            className="w-full h-[120%] object-cover scale-110 grayscale" 
             alt={title} 
           />
           {/* Stronger overlay for better text contrast */}
