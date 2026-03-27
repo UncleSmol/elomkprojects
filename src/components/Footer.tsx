@@ -69,6 +69,9 @@ const Footer = () => (
             <li>
               <Link to="/compliance" className="hover:text-cyan transition-colors">Compliance</Link>
             </li>
+            <li>
+              <Link to="/sitemap" className="hover:text-cyan transition-colors">Sitemap</Link>
+            </li>
           </ul>
         </div>
 

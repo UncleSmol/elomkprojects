@@ -17,6 +17,7 @@ const CorporatePage = lazy(() => import('./pages/CorporatePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const CompliancePage = lazy(() => import('./pages/CompliancePage'));
+const SitemapPage = lazy(() => import('./pages/SitemapPage'));
 const Page404 = lazy(() => import('./pages/Page404'));
 
 /**
@@ -66,6 +67,7 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPage />} />
                 <Route path="/compliance" element={<CompliancePage />} />
+                <Route path="/sitemap" element={<SitemapPage />} />
 
                 {/* 
                   Dynamic Corporate Routes: 
