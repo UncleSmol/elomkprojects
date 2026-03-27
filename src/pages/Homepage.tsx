@@ -56,23 +56,20 @@ const ServiceCard = React.memo(({
 }) => {
   const cardRef = useRef(null);
 
-  // Track scroll progress of this specific card
+  // Track scroll progress of this specific card for parallax
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "end start"],
   });
 
-  // Smooth out the scroll progress for a high-quality feel
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
 
-  // Calculate parallax transforms
+  // Parallax: translate vertically based on scroll
   const y = useTransform(smoothProgress, [0, 1], [100 * speed, -100 * speed]);
-  const opacity = useTransform(smoothProgress, [0, 0.1, 0.85, 1], [0, 1, 1, 0]);
-  const scale = useTransform(smoothProgress, [0.8, 1], [1, 0.9]);
 
   // Handle image src for both external and local images
   const imgSrc = img.includes("unsplash.com") 
@@ -82,8 +79,12 @@ const ServiceCard = React.memo(({
   return (
     <motion.article
       ref={cardRef}
-      style={{ y, opacity, scale }}
-      className="group relative h-[450px] md:h-[550px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-overlay)] uppercase text-white shadow-2xl will-change-transform"       
+      style={{ y }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+      className="group relative h-[450px] md:h-[550px] w-full rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-overlay)] uppercase text-white shadow-2xl will-change-transform"
     >
       {/* Background Image with Hover Effect */}
       <div className="absolute inset-0 z-0">
@@ -580,7 +581,7 @@ const Homepage = () => {
                 Get A Quote
               </Link>
               <a href="tel:0130011983" className="px-10 py-4 border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:text-[var(--bg-primary)] text-[var(--text-main)] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 text-center">
-                Call: 013 001 1983
+                Call Us
               </a>
             </div>
             {/* Trust Badges */}
