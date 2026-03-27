@@ -26,6 +26,7 @@ const SEO = ({
       <meta name="keywords" content={keywords} />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={url} />
+      <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
