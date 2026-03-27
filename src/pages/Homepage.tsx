@@ -28,7 +28,7 @@ import workflowBgImg from "../assets/installation-workflow.jpg";
 const TrustItem = React.memo(({ text }: { text: string }) => (
   <div className="flex items-center gap-2 text-[var(--text-muted)] whitespace-nowrap uppercase">
     <div className="w-1 h-1 rounded-full bg-cyan" />
-    <span className="text-[10px] md:text-xs uppercase tracking-widest font-rajdhani">
+    <span className="text-xs sm:text-sm md:text-xs uppercase tracking-widest font-rajdhani">
       {text}
     </span>
   </div>
@@ -101,20 +101,20 @@ const ServiceCard = React.memo(({
       <div className="relative z-20 h-full flex flex-col justify-end p-8 text-left text-white">    
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-px bg-cyan/50" />
-          <span className="text-[10px] uppercase font-rajdhani text-cyan font-bold">
+          <span className="text-xs md:text-[10px] uppercase font-rajdhani text-cyan font-bold">
             0{index + 1}
           </span>
         </div>
-        <h3 className="font-rajdhani font-bold text-2xl md:text-3xl mb-3 uppercase tracking-tight">
+        <h3 className="font-rajdhani font-bold text-3xl md:text-3xl mb-3 uppercase tracking-tight">
           {title}
         </h3>
-        <p className="text-sm md:text-base text-white/70 leading-relaxed font-medium max-w-xs mb-8 normal-case">
+        <p className="text-base md:text-base text-white/70 leading-relaxed font-medium max-w-xs mb-8 normal-case">
           {desc}
         </p>
         
         <Link 
           to={`/services#${path}`} 
-          className="w-fit px-6 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 group/btn flex items-center gap-2"
+          className="w-fit px-6 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-xs md:text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 group/btn flex items-center gap-2"
         >
           View Service Details
           <div className="w-1.5 h-1.5 rounded-full bg-cyan shadow-[0_0_10px_cyan] group-hover/btn:scale-125 transition-transform" />
@@ -198,20 +198,20 @@ const WorkflowStep = React.memo(({ step, index, scrollYProgress }: { step: any, 
         {/* Step Text Content */}
         <div className="relative z-20 h-full w-full flex flex-col justify-center items-center px-6 text-center">  
           <div className="max-w-4xl">
-            <span className="text-[10px] md:text-xs font-rajdhani font-bold text-cyan uppercase mb-4 block">      
+            <span className="text-xs md:text-xs font-rajdhani font-bold text-cyan uppercase mb-4 block">      
               {step.tag}
             </span>
-            <h3 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight uppercase">
+            <h3 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight uppercase">
               {step.title}
             </h3>
-            <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+            <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
               {step.desc}
             </p>
             
             <button 
               onClick={() => setIsModalOpen(true)}
               aria-haspopup="dialog"
-              className="px-8 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 flex items-center gap-3 mx-auto group/btn"
+              className="px-8 py-3 bg-white/5 border border-white/10 hover:border-cyan/50 hover:bg-cyan/5 text-xs md:text-[10px] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 flex items-center gap-3 mx-auto group/btn"
             >
               System Deep Dive
               <div className="w-2 h-2 rounded-full bg-cyan shadow-[0_0_10px_cyan] group-hover/btn:scale-125 transition-transform" />
@@ -398,7 +398,7 @@ const WorkflowSection = () => {
                 <motion.div style={{ opacity: isActive }} className="h-1 w-12 bg-white/10 rounded-full relative overflow-hidden">
                   <motion.div className="absolute inset-0 bg-cyan shadow-[0_0_10px_cyan]" style={{ width: fillWidth }} />
                 </motion.div>
-                <motion.span style={{ opacity: isActive }} className="text-[8px] font-rajdhani font-bold text-cyan tracking-tighter">
+                <motion.span style={{ opacity: isActive }} className="text-[10px] sm:text-xs font-rajdhani font-bold text-cyan tracking-tighter">
                   {i === 0 ? "START" : `0${i}`}
                 </motion.span>
               </div>
@@ -428,15 +428,15 @@ const WorkflowSection = () => {
           <div className="relative z-20 max-w-3xl">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-px bg-indigo/40" />
-              <span className="text-[10px] uppercase font-rajdhani font-bold text-cyan">Our Process</span>      
+              <span className="text-xs md:text-[10px] uppercase font-rajdhani font-bold text-cyan">Our Process</span>      
             </div>
-            <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight uppercase">
+            <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight uppercase">
               Installation <span className="text-white/60 italic">Workflow</span>
             </h2>
             <p className="text-white/70 font-medium leading-relaxed max-w-xl text-lg text-left">     
               A simple and reliable way to get your property secured.
             </p>
-            <div className="mt-12 flex items-center gap-4 text-[10px] font-rajdhani uppercase text-cyan/60 font-bold">
+            <div className="mt-12 flex items-center gap-4 text-xs md:text-[10px] font-rajdhani uppercase text-cyan/60 font-bold">
               <ChevronDown className="w-4 h-4 animate-pulse" /> Scroll To See How We Work
             </div>
           </div>
@@ -577,10 +577,10 @@ const Homepage = () => {
               </span>
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 mb-8 uppercase">
-              <Link to="/contact" className="px-10 py-4 bg-indigo hover:bg-indigo/80 text-white font-rajdhani font-bold tracking-widest uppercase rounded transition-all shadow-[0_4px_20px_rgba(46,42,160,0.4)] active:scale-95 text-center">
+              <Link to="/contact" className="px-10 py-4 bg-indigo hover:bg-indigo/80 text-white font-rajdhani font-bold tracking-widest uppercase rounded transition-all shadow-[0_4px_20px_rgba(46,42,160,0.4)] active:scale-95 text-center text-sm md:text-base">
                 Get A Quote
               </Link>
-              <a href="tel:0130011983" className="px-10 py-4 border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:text-[var(--bg-primary)] text-[var(--text-main)] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 text-center">
+              <a href="tel:0130011983" className="px-10 py-4 border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:text-[var(--bg-primary)] text-[var(--text-main)] font-rajdhani font-bold tracking-widest uppercase rounded transition-all active:scale-95 text-center text-sm md:text-base">
                 Call Us
               </a>
             </div>
@@ -609,7 +609,7 @@ const Homepage = () => {
             style={{ opacity: textOpacity }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
           >
-            <span className="text-[10px] font-rajdhani font-bold text-cyan/40 uppercase tracking-[0.3em]">      
+            <span className="text-xs sm:text-sm md:text-[10px] font-rajdhani font-bold text-cyan/40 uppercase tracking-[0.3em]">      
               Scroll
             </span>
             <div className="w-px h-12 bg-gradient-to-b from-cyan/40 to-transparent relative overflow-hidden">
@@ -628,12 +628,12 @@ const Homepage = () => {
         <header className="max-w-3xl mb-32">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-12 h-px bg-indigo/40" />
-            <span className="text-[10px] uppercase tracking-[0.4em] font-rajdhani font-bold text-cyan">
+            <span className="text-xs md:text-[10px] uppercase tracking-[0.4em] font-rajdhani font-bold text-cyan">
               What We Do
             </span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight text-left uppercase">
-            Quality <span className="text-[var(--text-muted)] italic text-3xl md:text-5xl">Technical</span>{" "}
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-left uppercase">
+            Quality <span className="text-[var(--text-muted)] italic text-4xl md:text-5xl">Technical</span>{" "}
             Services
           </h2>
         </header>
