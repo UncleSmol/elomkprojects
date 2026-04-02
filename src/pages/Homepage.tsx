@@ -531,15 +531,15 @@ const Homepage = () => {
           email: "admin@elomkprojects.co.za",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "84310 Market Street",
+            streetAddress: "62 Besembos Street, Tasbet Park",
             addressLocality: "Emalahleni",
             postalCode: "1035",
             addressCountry: "ZA"
           },
           geo: {
             "@type": "GeoCoordinates",
-            latitude: -25.8738,
-            longitude: 29.2320
+            latitude: -25.9280,
+            longitude: 29.2362
           },
           openingHoursSpecification: {
             "@type": "OpeningHoursSpecification",

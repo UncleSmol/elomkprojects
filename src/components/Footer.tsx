@@ -84,7 +84,7 @@ const Footer = () => (
             <div className="flex items-start gap-4">
               <MapPin className="w-4 h-4 text-cyan mt-0.5" />
               <span>
-                84310 Market Street
+                62 Besembos Street, Tasbet Park
                 <br />
                 Emalahleni 1035
               </span>

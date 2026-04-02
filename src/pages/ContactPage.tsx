@@ -183,7 +183,7 @@ const ContactPage = () => {
                 <div>
                   <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Head Office</h4>
                   <p className="text-[var(--text-muted)] text-xs leading-relaxed uppercase">
-                    84310 Market Street<br />Emalahleni 1035
+                    62 Besembos Street, Tasbet Park<br />Emalahleni 1035
                   </p>
                 </div>
               </div>

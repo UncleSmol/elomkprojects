@@ -16,8 +16,8 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const Map = () => {
-  // Coordinates for Market Street area in Emalahleni
-  const position: [number, number] = [-25.8730, 29.2250];
+  // Coordinates for Tasbet Park area in Emalahleni
+  const position: [number, number] = [-25.9280, 29.2362];
 
   return (
     <div className="w-full h-[400px] rounded-2xl overflow-hidden border border-[var(--border-color)] shadow-2xl relative z-10">
@@ -35,7 +35,7 @@ const Map = () => {
           <Popup>
             <div className="font-rajdhani text-center uppercase">
               <strong className="text-indigo">ELOMK Projects HQ</strong><br />
-              84310 Market Street<br />
+              62 Besembos Street, Tasbet Park<br />
               Emalahleni 1035
             </div>
           </Popup>
