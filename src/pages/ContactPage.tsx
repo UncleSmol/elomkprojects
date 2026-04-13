@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -27,29 +27,24 @@ const ContactPage = () => {
   const yContent = useTransform(smoothProgress, [0, 1], ["5%", "-5%"]);
   const opacity = useTransform(smoothProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    service: 'Other / Quote Request',
-    message: ''
+  const [formData, setFormData] = useState(() => {
+    const options = ["Electric Fencing", "CCTV Installations", "Gate Automation", "Plumbing"];
+    const service = initialService 
+      ? options.find(opt => opt.toLowerCase() === initialService.toLowerCase()) || initialService
+      : 'Other / Quote Request';
+    
+    return {
+      name: '',
+      phone: '',
+      email: '',
+      service,
+      message: ''
+    };
   });
 
   const [ticketId] = useState(() => Math.floor(100000 + Math.random() * 900000));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (initialService) {
-      const options = ["Electric Fencing", "CCTV Installations", "Gate Automation", "Plumbing"];
-      const match = options.find(opt => opt.toLowerCase() === initialService.toLowerCase());
-      if (match) {
-        setFormData(prev => ({ ...prev, service: match }));
-      } else {
-        setFormData(prev => ({ ...prev, service: initialService }));
-      }
-    }
-  }, [initialService]);
 
   const sanitizeInput = (str: string) => {
     return str.replace(/[<>]/g, '').trim();
@@ -84,9 +79,10 @@ const ContactPage = () => {
         setStatus('error');
         setErrorMessage(errorData.error || `Server returned ${response.status}: ${response.statusText}`);
       }
-    } catch (err: any) {
+    } catch (err: Error | unknown) {
       setStatus('error');
-      setErrorMessage(err.message || "Network error. Please ensure you are running the project via Vercel CLI (vercel dev).");
+      const errorMessage = err instanceof Error ? err.message : "Network error. Please ensure you are running the project via Vercel CLI (vercel dev).";
+      setErrorMessage(errorMessage);
     }
   };
 
@@ -207,7 +203,7 @@ const ContactPage = () => {
                 <div>
                   <h4 className="font-bold text-sm tracking-widest mb-2 uppercase">Email Channel</h4>
                   <p className="text-[var(--text-muted)] text-xs leading-relaxed lowercase">
-                    admin@elokprojects.co.za
+                    admin@elomkprojects.co.za
                   </p>
                 </div>
               </div>
