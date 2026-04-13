@@ -97,9 +97,9 @@ const Footer = () => (
               <FaWhatsapp className="w-4 h-4 text-cyan" />
               <span>+27 76 011 3690</span>
             </a>
-            <a href="mailto:admin@elokprojects.co.za" className="flex items-center gap-4 hover:text-cyan transition-colors">
+            <a href="mailto:admin@elomkprojects.co.za" className="flex items-center gap-4 hover:text-cyan transition-colors">
               <Mail className="w-4 h-4 text-cyan" />
-              <span>admin@elokprojects.co.za</span>
+              <span>admin@elomkprojects.co.za</span>
             </a>
           </div>
         </div>
